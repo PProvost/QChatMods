@@ -1,0 +1,14 @@
+## Interface: 30200
+## Author: Quaiche
+## Notes: Minor tweaks to chat frames. Works well when combined with BasicChatMods by Funkydude
+## Version: 1.0
+## Title: QChatMods
+## OptionalDeps: BasicChatMods
+## X-Category: Chat/Communication
+## X-License: Apache-2.0
+## OptionalDeps: Blizzard_CombatLog
+
+EditBox.lua
+ChannelNames.lua
+AltClickInvite.lua
+InviteLinks.lua
