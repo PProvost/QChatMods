@@ -1,9 +1,8 @@
 ## Interface: 30200
 ## Author: Quaiche
-## Notes: Minor tweaks to chat frames.
+## Notes: A collection of hacks and tweaks to the ChatFrames and the ChatEditBox to get things just the way I like 'em.
 ## Version: 1.0
 ## Title: QChatMods
 ## X-Category: Chat/Communication
-## OptionalDeps: Blizzard_CombatLog, QLayout
 
 QChatMods.lua
