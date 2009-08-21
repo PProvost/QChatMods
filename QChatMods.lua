@@ -63,7 +63,7 @@ local function AddMessage(frame, text, ...)
 	if not text then return hooks[frame](frame, text, ...) end
 
 	-- Channel name replacement
-	text = gsub(text, "^|Hchannel:(%S-)|h(%[([%d. ]*)([^%]]+)%])|h ", replaceChannel)
+	text = gsub(text, "^|Hchannel:(%S-)|h(%[([%d. ]*)([^%]]+)%])|h ", replaceChannelName)
 	text = gsub(text, "^To ", "[W:To]")
 	text = gsub(text, "^(.-|h) whispers:", "[W:From] %1:")
 
@@ -145,7 +145,7 @@ ChatTypeInfo.WHISPER.sticky = 1
 ChatTypeInfo.CHANNEL.sticky = 1
 
 --[[ Timestamp format for Combatlog ]]--
-_G.TEXT_MODE_A_STRING_TIMESTAMP = "|cff"..TIMESTAMP_COLOR.."[%s]|r %s"
+_G.TEXT_MODE_A_STRING_TIMESTAMP = "|cff77777777[%s]|r %s"
 
 --[[ Tweak the Chat Windows ]]--
 do 
