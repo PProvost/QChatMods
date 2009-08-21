@@ -5,6 +5,14 @@
 -- the tips and tricks used here.
 --
 
+local strmatch = _G.string.match
+local date = _G.date
+local IsAltKeyDown = _G.IsAltKeyDown
+local IsShiftKeyDown = _G.IsShiftKeyDown 
+local IsControlKeyDown = _G.IsControlKeyDown
+local ShowUIPanel = _G.ShowUIPanel
+local HideUIPanel = _G.HideUIPanel
+
 local shortNames = {
 	["Guild"] = "[G]",
 	["Officer"] = "[O]",
@@ -16,6 +24,15 @@ local shortNames = {
 	["Battleground"] = "[BG]",
 	["Battleground Leader"] = "[BL]",
 }
+
+local hoverLinkTypes = {
+	item = true,
+	enchant = true,
+	spell = true,
+	quest = true,
+}
+
+local hooks = {}
 
 --[[ Pre-hook SetItemRef to enable Alt-click on names for Invites ]]
 local setItemRefOrig = SetItemRef
@@ -42,8 +59,6 @@ local function replaceChannelName(origChannel, msg, num, channel)
 end
 
 --[[ Hook function for the ChatFrame.AddMessage function. ]]--
-local date = _G.date
-local hooks = {}
 local function AddMessage(frame, text, ...)
 	if not text then return hooks[frame](frame, text, ...) end
 
@@ -76,6 +91,22 @@ local function ChatFrame_OnMouseWheel(frame, delta)
 		else
 			frame:ScrollDown()
 		end
+	end
+end
+
+local function ChatFrame_OnHyperlinkEnter(self, link)
+	local t = strmatch(link, "^(.-):")
+	if hoverLinkTypes[t] then
+		GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
+		GameTooltip:SetHyperlink(link)
+		GameTooltip:Show()
+	end			
+end
+
+local function ChatFrame_OnHyperlinkLeave(self, link)
+	local t = strmatch(link, "^(.-):")
+	if hoverLinkTypes[t] then
+		GameTooltip:Hide()
 	end
 end
 
@@ -122,10 +153,13 @@ do
 	for i = 1, NUM_CHAT_WINDOWS do
 		cf = _G["ChatFrame"..i]
 
-		-- Only do channel name and timestamps on non-combat log frames
+		-- Only do channel name, timestamps and hyperlink hooking on non-combat log frames
 		if cf ~= COMBATLOG then 
 			hooks[cf] = cf.AddMessage
 			cf.AddMessage = AddMessage
+
+			cf:HookScript("OnHyperlinkEnter", ChatFrame_OnHyperlinkEnter)
+			cf:HookScript("OnHyperlinkEnter", ChatFrame_OnHyperlinkLeave)
 		end
 
 		-- Mouse wheel scrolling
