@@ -4,6 +4,6 @@
 ## Version: 1.0
 ## Title: QChatMods
 ## X-Category: Chat/Communication
-## OptionalDeps: Blizzard_CombatLog
+## OptionalDeps: Blizzard_CombatLog, QLayout
 
 QChatMods.lua
