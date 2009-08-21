@@ -1,0 +1,4 @@
+QChatMods is a collection of hacks and tweaks to the ChatFrames and the ChatEditBox to get things just the way I like 'em.
+
+Thanks to tekkub, Funkydude, the various authors of Chatter, Industrial, and many others for the tips and tricks used here.
+
