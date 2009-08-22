@@ -25,13 +25,6 @@ local shortNames = {
 	["Battleground Leader"] = "[BL]",
 }
 
-local hoverLinkTypes = {
-	item = true,
-	enchant = true,
-	spell = true,
-	quest = true,
-}
-
 local hooks = {}
 
 --[[ Pre-hook SetItemRef to enable Alt-click on names for Invites ]]
@@ -94,22 +87,6 @@ local function ChatFrame_OnMouseWheel(frame, delta)
 	end
 end
 
-local function ChatFrame_OnHyperlinkEnter(self, link)
-	local t = strmatch(link, "^(.-):")
-	if hoverLinkTypes[t] then
-		GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
-		GameTooltip:SetHyperlink(link)
-		GameTooltip:Show()
-	end			
-end
-
-local function ChatFrame_OnHyperlinkLeave(self, link)
-	local t = strmatch(link, "^(.-):")
-	if hoverLinkTypes[t] then
-		GameTooltip:Hide()
-	end
-end
-
 do ---[[ EditBox Positioning and Texturing ]]--
 	local eb = ChatFrameEditBox
 	local x=({eb:GetRegions()})
@@ -144,6 +121,12 @@ ChatTypeInfo.BATTLEGROUND.sticky = 1
 ChatTypeInfo.WHISPER.sticky = 1
 ChatTypeInfo.CHANNEL.sticky = 1
 
+for k,v in pairs(ChatTypeInfo) do
+	if v.colorNameByClass then
+		v.colorNameByClass = true
+	end
+end
+
 --[[ Timestamp format for Combatlog ]]--
 _G.TEXT_MODE_A_STRING_TIMESTAMP = "|cff77777777[%s]|r %s"
 
@@ -157,9 +140,6 @@ do
 		if cf ~= COMBATLOG then 
 			hooks[cf] = cf.AddMessage
 			cf.AddMessage = AddMessage
-
-			cf:HookScript("OnHyperlinkEnter", ChatFrame_OnHyperlinkEnter)
-			cf:HookScript("OnHyperlinkEnter", ChatFrame_OnHyperlinkLeave)
 		end
 
 		-- Mouse wheel scrolling
@@ -171,6 +151,17 @@ do
 		hideFrameForever(_G['ChatFrame'..i..'DownButton'])
 		hideFrameForever(_G['ChatFrame'..i..'BottomButton'])
 	end
+end
+
+-- Group Say
+
+SLASH_GROUPSAY1 = "/gr"
+SlashCmdList.GROUPSAY = function(msg)
+	local channel = "SAY"
+	if IsInInstance() then channel = "BATTLEGROUND" end
+	if GetNumRaidMembers() > 0 then channel = "RAID" end
+	if GetNumPartyMembers() > 0 then channel = "PARTY" end
+	SendChatMessage(msg, channel) 
 end
 
 --[[ URLCopy -- from BasicChatMods ]]-- 
