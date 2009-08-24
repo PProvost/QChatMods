@@ -1,7 +1,7 @@
 --
 -- QChatMods - My personal tweaks to the chat frames and edit box
 --
--- Thanks to Industrial, Funkydude, the various authors of Chatter, and many others for
+-- Thanks to Industrial, Funkydude, tekkub, the various authors of Chatter, and many others for
 -- the tips and tricks used here.
 --
 
@@ -105,8 +105,11 @@ do ---[[ EditBox Positioning and Texturing ]]--
 	eb=nil
 end
 
---[[ Hide the main chat menu button ]]
+--[[ Hide the main chat menu button ]]--
 ChatFrameMenuButton:Hide()
+
+--[[ Enable history without Alt pressed ]]--
+ChatFrameEditBox:SetAltArrowKeyMode(false)
 
 --[[ Set sticky channels ]]
 ChatTypeInfo.SAY.sticky = 1
@@ -154,15 +157,6 @@ do
 end
 
 -- Group Say
-
-SLASH_GROUPSAY1 = "/gr"
-SlashCmdList.GROUPSAY = function(msg)
-	local channel = "SAY"
-	if IsInInstance() then channel = "BATTLEGROUND" end
-	if GetNumRaidMembers() > 0 then channel = "RAID" end
-	if GetNumPartyMembers() > 0 then channel = "PARTY" end
-	SendChatMessage(msg, channel) 
-end
 
 --[[ URLCopy -- from BasicChatMods ]]-- 
 do  
