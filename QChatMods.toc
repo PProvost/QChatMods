@@ -1,4 +1,4 @@
-## Interface: 30200
+## Interface: 30300
 ## Author: Quaiche
 ## Notes: A collection of hacks and tweaks to the ChatFrames and the ChatEditBox to get things just the way I like 'em.
 ## Version: 1.0
