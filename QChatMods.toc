@@ -5,4 +5,13 @@
 ## Title: QChatMods
 ## X-Category: Chat/Communication
 
-QChatMods.lua
+AltClickInvite.lua                                                                                                     
+ChatColors.lua                                                                                                         
+CombatLog.lua                                                                                                          
+EditBox.lua                                                                                                            
+HideButtons.lua                                                                                                        
+MessageReformat.lua                                                                                                    
+MouseWheelScroll.lua                                                                                                   
+StickyChannels.lua                                                                                                     
+UrlCopy.lua                                                                                                            
+
