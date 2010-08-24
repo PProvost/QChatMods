@@ -100,7 +100,7 @@ local function SetItem(link, ...)
 	end
 	return ref(link, ...)
 end
-_G["SetItemRef"] = SetItem
+-- _G["SetItemRef"] = SetItem
 
 --		Popup Box		--
 StaticPopupDialogs["BCMUrlCopyDialog"] = {

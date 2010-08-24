@@ -1,6 +1,7 @@
 local addonName, ns = ...
 
 --[[ Pre-hook SetItemRef to enable Alt-click on names for Invites ]]
+--[[
 local setItemRefOrig = SetItemRef
 function SetItemRef(link, text, button)
 	local linkType = string.sub(link, 1, 6)
@@ -11,5 +12,4 @@ function SetItemRef(link, text, button)
 	end
 	return setItemRefOrig(link, text, button)
 end
-
-
+]]

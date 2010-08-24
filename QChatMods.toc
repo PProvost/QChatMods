@@ -8,6 +8,7 @@
 AltClickInvite.lua                                                                                                     
 ChatColors.lua                                                                                                         
 CombatLog.lua                                                                                                          
+CustomChannels.lua
 EditBox.lua                                                                                                            
 HideButtons.lua                                                                                                        
 MessageReformat.lua                                                                                                    

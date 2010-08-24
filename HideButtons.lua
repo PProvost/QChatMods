@@ -5,12 +5,11 @@ local function hideFrameForever(f)
 	f:Hide() 
 end 
 
-ChatFrameMenuButton:Hide()
+hideFrameForever(ChatFrameMenuButton)
+hideFrameForever(FriendsMicroButton)
 
 for i = 1, NUM_CHAT_WINDOWS do
 	-- Hide buttons
-	hideFrameForever(_G['ChatFrame'..i..'UpButton'])
-	hideFrameForever(_G['ChatFrame'..i..'DownButton'])
-	hideFrameForever(_G['ChatFrame'..i..'BottomButton'])
+	hideFrameForever(_G['ChatFrame'..i..'ButtonFrame'])
 end
 

@@ -1,6 +1,6 @@
 local addonName, ns = ...
 
-local eb = ChatFrameEditBox
+local eb = ChatFrame1EditBox
 
 --[[ Enable history without Alt pressed ]]--
 eb:SetAltArrowKeyMode(false)

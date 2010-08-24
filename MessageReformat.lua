@@ -1,5 +1,8 @@
 local addonName, ns = ...
 
+local debugf = tekDebug and tekDebug:GetFrame(addonName)
+local function Debug(...) if debugf then debugf:AddMessage(string.join(", ", tostringall(...))) end end
+
 local shortNames = {
 	["Guild"] = "[G]",
 	["Officer"] = "[O]",
@@ -19,20 +22,19 @@ local hooks = {}
 --[[ Channel name shortening helper function ]]--
 local function replaceChannelName(origChannel, msg, num, channel)
 	local newChannelName = shortNames[channel] or shortNames[channel:lower()] or msg
-	return ("|Hchannel:%s|h%s|h"):format(origChannel, newChannelName)
+	return (BetterDate(CHAT_TIMESTAMP_FORMAT, time()).."|Hchannel:%s|h%s|h"):format(origChannel, newChannelName)
 end
 
---[[ Hook function for the ChatFrame.AddMessage function. ]]--
+	--[[ Hook function for the ChatFrame.AddMessage function. ]]--
 local function AddMessage(frame, text, ...)
 	if not text then return hooks[frame](frame, text, ...) end
 
-	-- Channel name replacement
-	text = gsub(text, "^|Hchannel:(%S-)|h(%[([%d. ]*)([^%]]+)%])|h ", replaceChannelName)
-	text = gsub(text, "^To ", "[W:To]")
-	text = gsub(text, "^(.-|h) whispers:", "[W:From] %1:")
+	Debug(gsub(text, "|", "||"))
 
-	-- Timestamps
-	text = "|cff777777["..date("%X").."]|r"..text
+	-- Channel name replacement
+	text = gsub(text, "^%d+:%d+:%d+ |Hchannel:(%S-)|h(%[([%d. ]*)([^%]]+)%])|h ", replaceChannelName)
+	text = gsub(text, "^%d+:%d+:%d+ To ", BetterDate(CHAT_TIMESTAMP_FORMAT, time()).."[W:To]")
+	text = gsub(text, "^%d+:%d+:%d+ (.-|h) whispers:", BetterDate(CHAT_TIMESTAMP_FORMAT, time()).."[W:From] %1:")
 
 	return hooks[frame](frame, text, ...)
 end
